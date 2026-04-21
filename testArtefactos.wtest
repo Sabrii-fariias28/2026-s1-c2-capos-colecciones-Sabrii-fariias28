@@ -1,0 +1,58 @@
+import capos.*
+
+describe "Ronaldo recolecta artefactos" {
+  test "Guarda 2 artefactos en la mochila y llega al castillo : Caso normal" {
+    ronaldo.capacidad(2)
+    ronaldo.recolectar(espada)
+      // Otra forma: assert.that(rolando.artefactos().contains(espada))
+    assert.equals(#{espada}, ronaldo.artefactosQueLleva())
+    ronaldo.recolectar(libro)
+    assert.equals(#{espada,libro}, ronaldo.artefactosQueLleva())
+
+    ronaldo.llegarA(castillo)
+    assert.equals(#{}, ronaldo.artefactosQueLleva())
+    assert.equals([espada,libro], castillo.artefactosQueHay())
+
+    ronaldo.recolectar(collar)
+    assert.equals(#{collar}, ronaldo.artefactosQueLleva())
+
+    ronaldo.llegarA(castillo)
+    assert.equals([espada,libro,collar], castillo.artefactosQueHay())
+    
+  }
+    test "Ronaldo no recolecta un artefacto" {
+      ronaldo.capacidad(0)
+      ronaldo.recolectar(espada)
+      assert.equals(0, ronaldo.artefactosQueLleva().size())
+    }
+
+  test "Validar que no puede agarrar 3 artefactos a la mochila por la capacidad 2" {
+    ronaldo.recolectar(espada)
+    ronaldo.recolectar(libro)
+    ronaldo.recolectar(collar)
+    assert.notThat(ronaldo.tieneEspacio())
+  }
+
+  test "El castillo tiene 2 artefactos y ronaldo 1 en su mochila, las posesiones deberian ser 3" {
+    castillo.guardarArtefactos([collar,espada])
+    assert.equals([collar,espada], castillo.artefactosQueHay())
+
+    ronaldo.recolectar(armadura)
+    assert.equals(#{armadura}, ronaldo.artefactosQueLleva())
+
+    ronaldo.posesiones()
+    assert.equals([armadura,collar,espada], ronaldo.posesiones())
+  }
+
+  test "Que Ronaldo no tenga el libro en sus posesiones" {
+    castillo.guardarArtefactos([collar,espada])
+    assert.equals([collar,espada], castillo.artefactosQueHay())
+
+    ronaldo.recolectar(armadura)
+    assert.equals(#{armadura}, ronaldo.artefactosQueLleva())
+
+    ronaldo.posesiones()
+    assert.equals([armadura,collar,espada], ronaldo.posesiones())
+    assert.notThat(ronaldo.posee(libro))
+  }
+}
