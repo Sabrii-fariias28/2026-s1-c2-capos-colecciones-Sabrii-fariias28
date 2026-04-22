@@ -2,12 +2,17 @@ object ronaldo {
   const listaArtefactos = #{}
   var capacidadMax = 2
   var morada = castillo
+  var historial = []
   
   /*Si usara lista tengo que usar verificacion para que el elemento no este antes en la mochila, si usaramos conjunto no pasa*/
   method recolectar(artefacto) {
+    historial = historial + [artefacto]
     if(self.tieneEspacio()){
     listaArtefactos.add(artefacto)
     }
+  }
+  method historial() {
+    return historial
   }
 
   method tieneEspacio() {
@@ -33,6 +38,10 @@ object ronaldo {
 
   method posee(artefacto) {
     return self.posesiones().contains(artefacto)
+  }
+
+  method historia() {
+    return
   }
 }
 
