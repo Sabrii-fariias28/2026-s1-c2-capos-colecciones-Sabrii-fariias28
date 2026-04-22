@@ -3,7 +3,8 @@ object ronaldo {
   var capacidadMax = 2
   var morada = castillo
   var historial = []
-  
+  var poderBase = 5
+
   /*Si usara lista tengo que usar verificacion para que el elemento no este antes en la mochila, si usaramos conjunto no pasa*/
   method recolectar(artefacto) {
     historial = historial + [artefacto]
@@ -40,15 +41,25 @@ object ronaldo {
     return self.posesiones().contains(artefacto)
   }
 
-  method historia() {
-    return
+
+  method poderBase() {
+    return poderBase
+  }
+
+  method poderPelea() {
+    const poderPelea = listaArtefactos.sum({artefacto => artefacto.poder(self)})
+    return poderBase + poderPelea
+  }
+
+  method lucharBatalla() {
+    listaArtefactos.forEach({artefacto => artefacto.utilizar()})
+    poderBase += 1
+  }
+
+  method cambiarMorada(_morada) {
+    morada = _morada
   }
 }
-
-object espada {}
-object libro{}
-object collar{}
-object armadura{}
 
 object castillo {
   /*El cons es una referecia, no es que siempre va a ser la misma lista. Sino lo qu ees constante es la referecia.*/
@@ -59,6 +70,10 @@ object castillo {
   }
   method artefactosQueHay() {
     return listaArtefactos
+  }
+
+  method artefactoMasPoderoso(personaje) {
+    return listaArtefactos.max({a => a.poder(personaje)})
   }
 }
 
@@ -87,4 +102,14 @@ No es escalable, esta codeado con anticipacion, es una referencia global
     castillo.guardarArtefactos(listaArtefactos)
     listaArtefactos.clear()
   }
+*/
+
+/*Ejemplo de la clase: Esta mal, porque no es trabajo de ronaldo
+encontrar el mas poderoso del castillo, sino que es responsabilidad
+del castillo
+object ronaldo {
+  method artefactoMasPoderosoDeLaMorada(){
+    return castillo.listaArtefactos().max()({a => a.poder()})
+}
+}
 */
