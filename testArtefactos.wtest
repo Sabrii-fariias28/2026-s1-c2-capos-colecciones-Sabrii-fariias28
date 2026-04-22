@@ -1,7 +1,86 @@
 import capos.*
+import artefactos.*
 
-describe "name" {
-  test "description" {
+describe "Poder artefactos" {
+  test "Poder espada" {
+    ronaldo.capacidad(1)
+    ronaldo.recolectar(espada)
+
+    assert.equals(5, espada.poder(ronaldo))
+
     
+    ronaldo.lucharBatalla()
+    assert.equals(3, espada.poder(ronaldo))
+  }
+
+    test "Poder collar" {
+    ronaldo.capacidad(1)
+    ronaldo.recolectar(collar)
+
+    assert.equals(3, collar.poder(ronaldo))
+
+    ronaldo.lucharBatalla()
+    assert.equals(3, collar.poder(ronaldo))
+
+    ronaldo.lucharBatalla()
+    assert.equals(5, collar.poder(ronaldo))
+  }
+
+    test "Poder armadura" {
+    ronaldo.capacidad(1)
+    ronaldo.recolectar(armadura)
+
+    assert.equals(6, armadura.poder(ronaldo))
+
+    ronaldo.lucharBatalla()
+    assert.equals(6, armadura.poder(ronaldo))
+  }
+}
+
+describe "Batallas de Ronaldo" {
+  test "Ronaldo : Primer batalla" {
+    ronaldo.capacidad(3)
+    ronaldo.recolectar(espada)
+    ronaldo.recolectar(armadura)
+    ronaldo.recolectar(collar)
+
+    //Poder de base 5 + espada 5 + collar 3 + armadura 6 
+    assert.equals(19, ronaldo.poderPelea())
+    ronaldo.lucharBatalla()
+    //Poder de base 6 + espada 3 + collar 3 + armadura 6 
+    assert.equals(18, ronaldo.poderPelea())
+  }
+
+  test "Ronaldo: Segunda batalla" {
+    ronaldo.capacidad(3)
+    ronaldo.recolectar(espada)
+    ronaldo.recolectar(armadura)
+    ronaldo.recolectar(collar)
+
+    assert.equals(19, ronaldo.poderPelea())
+    ronaldo.lucharBatalla()
+
+    assert.equals(18, ronaldo.poderPelea())
+
+    ronaldo.lucharBatalla()
+    assert.equals(21.5,ronaldo.poderPelea())
+  }
+
+  test "Ronaldo: Tercera batalla" {
+    ronaldo.capacidad(3)
+    ronaldo.recolectar(espada)
+    ronaldo.recolectar(armadura)
+    ronaldo.recolectar(collar)
+
+    assert.equals(19, ronaldo.poderPelea())
+    ronaldo.lucharBatalla()
+
+    assert.equals(18, ronaldo.poderPelea())
+
+    ronaldo.lucharBatalla()
+    assert.equals(21.5,ronaldo.poderPelea())
+
+    ronaldo.lucharBatalla()
+    assert.equals(24,ronaldo.poderPelea())
   }
 }
