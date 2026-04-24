@@ -3,7 +3,6 @@ import artefactos.*
 
 describe "Poder artefactos" {
   test "Poder espada" {
-<<<<<<< HEAD
     rolando.capacidad(1)
     rolando.recolectar(espada)
 
@@ -80,87 +79,6 @@ describe "Batallas de Ronaldo" {
 
     rolando.lucharBatalla()
     assert.equals(21.5,rolando.poderPelea())
-
-    rolando.lucharBatalla()
-    assert.equals(24, rolando.poderPelea())
-=======
-    ronaldo.capacidad(1)
-    ronaldo.recolectar(espada)
-
-    assert.equals(5, espada.poder(ronaldo))
-
-    
-    ronaldo.lucharBatalla()
-    assert.equals(3, espada.poder(ronaldo))
->>>>>>> 414c5f920bf082e9df859efed4db6e6c29b02f3b
-  }
-
-    test "Poder collar" {
-    ronaldo.capacidad(1)
-    ronaldo.recolectar(collar)
-
-    assert.equals(3, collar.poder(ronaldo))
-
-    ronaldo.lucharBatalla()
-    assert.equals(3, collar.poder(ronaldo))
-
-    ronaldo.lucharBatalla()
-    assert.equals(5, collar.poder(ronaldo))
-  }
-
-    test "Poder armadura" {
-    ronaldo.capacidad(1)
-    ronaldo.recolectar(armadura)
-
-    assert.equals(6, armadura.poder(ronaldo))
-
-    ronaldo.lucharBatalla()
-    assert.equals(6, armadura.poder(ronaldo))
-  }
-}
-
-describe "Batallas de Ronaldo" {
-  test "Ronaldo : Primer batalla" {
-    ronaldo.capacidad(3)
-    ronaldo.recolectar(espada)
-    ronaldo.recolectar(armadura)
-    ronaldo.recolectar(collar)
-
-    //Poder de base 5 + espada 5 + collar 3 + armadura 6 
-    assert.equals(19, ronaldo.poderPelea())
-    ronaldo.lucharBatalla()
-    //Poder de base 6 + espada 3 + collar 3 + armadura 6 
-    assert.equals(18, ronaldo.poderPelea())
-  }
-
-  test "Ronaldo: Segunda batalla" {
-    ronaldo.capacidad(3)
-    ronaldo.recolectar(espada)
-    ronaldo.recolectar(armadura)
-    ronaldo.recolectar(collar)
-
-    assert.equals(19, ronaldo.poderPelea())
-    ronaldo.lucharBatalla()
-
-    assert.equals(18, ronaldo.poderPelea())
-
-    ronaldo.lucharBatalla()
-    assert.equals(21.5,ronaldo.poderPelea())
-  }
-
-  test "Ronaldo: Tercera batalla" {
-    ronaldo.capacidad(3)
-    ronaldo.recolectar(espada)
-    ronaldo.recolectar(armadura)
-    ronaldo.recolectar(collar)
-
-    assert.equals(19, ronaldo.poderPelea())
-    ronaldo.lucharBatalla()
-
-    assert.equals(18, ronaldo.poderPelea())
-
-    ronaldo.lucharBatalla()
-    assert.equals(21.5,ronaldo.poderPelea())
 
     ronaldo.lucharBatalla()
     assert.equals(24,ronaldo.poderPelea())
