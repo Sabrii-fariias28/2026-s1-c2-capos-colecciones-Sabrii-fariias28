@@ -1,9 +1,13 @@
+import moradas.*
+import enemigos.*
+
 object rolando {
   const listaArtefactos = #{}
   var capacidadMax = 2
   var morada = castillo
   var historial = []
   var poderBase = 5
+  const enemigos = #{caterina,archibaldo,astra}
 
   /*Si usara lista tengo que usar verificacion para que el elemento no este antes en la mochila, si usaramos conjunto no pasa*/
   method recolectar(artefacto) {
@@ -12,6 +16,7 @@ object rolando {
     listaArtefactos.add(artefacto)
     }
   }
+
   method historial() {
     return historial
   }
@@ -41,7 +46,6 @@ object rolando {
     return self.posesiones().contains(artefacto)
   }
 
-
   method poderBase() {
     return poderBase
   }
@@ -59,25 +63,27 @@ object rolando {
   method morada(_morada) {
     morada = _morada
   }
+
+  method puedeVencerEnemigos() {
+    return self.enemigos().filter({enemigo => enemigo.esDebil()})
+  }
+
+  method enemigos() {
+    return enemigos
+  }
+
+  method moradasConquistables() {
+    return self.puedeVencerEnemigos().map({enemigo => enemigo.morada()})
+  }
+
+  method esPoderoso() {
+    return self.enemigos().all({enemigo => enemigo.esDebil()})
+  }
+
+  method poderBase(_poderBase) {
+    poderBase = _poderBase
+  }
 }
-
-object castillo {
-  /*El cons es una referecia, no es que siempre va a ser la misma lista. Sino lo qu ees constante es la referecia.*/
-  const listaArtefactos = []
-
-  method guardarArtefactos(artefactos) {
-    listaArtefactos.addAll(artefactos)
-  }
-  method artefactosQueHay() {
-    return listaArtefactos
-  }
-
-  method artefactoMasPoderoso(personaje) {
-    return listaArtefactos.max({a => a.poder(personaje)})
-  }
-}
-
-
 
 /*
 Es anemico porque no se mandan mensajes a la mochila, sino que se usa a ronaldo para enviar los mensajes.

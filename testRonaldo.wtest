@@ -1,5 +1,7 @@
 import capos.*
 import artefactos.*
+import moradas.*
+
 
 
 describe "Ronaldo recolecta artefactos" {

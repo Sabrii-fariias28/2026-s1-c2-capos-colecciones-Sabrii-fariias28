@@ -1,4 +1,6 @@
 import capos.*
+import moradas.*
+
 
 object espada {
     var cantidadUsos = 0

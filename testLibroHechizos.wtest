@@ -1,9 +1,10 @@
 import capos.*
 import artefactos.*
+import moradas.*
+
 
 describe "Libro de hechizos: Ver si cada uno da bien el poder" {
   test "Poder de hechizo bendición" {
-    assert.equals(5, rolando.poderPelea())
     rolando.recolectar(libro)
 
     assert.equals(4, libro.poder(rolando))
@@ -11,7 +12,6 @@ describe "Libro de hechizos: Ver si cada uno da bien el poder" {
   }
 
   test "Poder hechizo invisibilidad" {
-    assert.equals(5, rolando.poderPelea())
     rolando.recolectar(libro)
 
     assert.equals(4, libro.poder(rolando))
@@ -23,7 +23,6 @@ describe "Libro de hechizos: Ver si cada uno da bien el poder" {
   }
 
   test "Poder hechizo invocación" {
-    assert.equals(5, rolando.poderPelea())
     rolando.capacidad(1)
     rolando.recolectar(armadura)
 

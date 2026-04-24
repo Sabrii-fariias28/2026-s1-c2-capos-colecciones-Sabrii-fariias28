@@ -1,0 +1,53 @@
+import capos.*
+import artefactos.*
+import moradas.*
+import enemigos.*
+
+describe "Enemigos" {
+  test "Rolando puede vencer a dos enemigos: Archibaldo y Astra" {
+    rolando.capacidad(3)
+    rolando.recolectar(espada)
+    rolando.recolectar(armadura)
+    rolando.recolectar(collar)
+
+    assert.equals(19, rolando.poderPelea())
+    assert.equals(#{archibaldo,astra},rolando.puedeVencerEnemigos())
+  }
+
+  test "Las moradas conquistables son 2: Mármol y Marfil" {
+    rolando.capacidad(3)
+    rolando.recolectar(espada)
+    rolando.recolectar(armadura)
+    rolando.recolectar(collar)
+    
+    assert.equals(19, rolando.poderPelea())
+    assert.equals(#{archibaldo,astra},rolando.puedeVencerEnemigos())
+    assert.equals([marmol,marfil],rolando.moradasConquistables())
+  }
+}
+
+describe "Rolando es poderoso" {
+  test "Rolando puede vencer a todos los enemigos" {
+    rolando.capacidad(4)
+    rolando.poderBase(10)
+    rolando.recolectar(espada)
+    rolando.recolectar(armadura)
+    rolando.recolectar(collar)
+    rolando.recolectar(libro)
+
+    /* Poder base: 10, espada 10, collar 3, armadura 6 y libro 4 = 33*/
+    assert.equals(33, rolando.poderPelea())
+    assert.that(rolando.esPoderoso())
+  }
+
+  test "Rolando no puede vender a todos los enemigos" {
+    rolando.capacidad(4)
+    rolando.recolectar(espada)
+    rolando.recolectar(armadura)
+    rolando.recolectar(collar)
+    rolando.recolectar(libro)
+
+    assert.equals(23, rolando.poderPelea())
+    assert.notThat(rolando.esPoderoso())
+  }
+}
