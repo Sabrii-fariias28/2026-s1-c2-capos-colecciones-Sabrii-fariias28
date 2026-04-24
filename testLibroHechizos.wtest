@@ -1,0 +1,128 @@
+import capos.*
+import artefactos.*
+
+describe "Libro de hechizos: Ver si cada uno da bien el poder" {
+  test "Poder de hechizo bendición" {
+    assert.equals(5, rolando.poderPelea())
+    rolando.recolectar(libro)
+
+    assert.equals(4, libro.poder(rolando))
+    assert.equals(9, rolando.poderPelea())
+  }
+
+  test "Poder hechizo invisibilidad" {
+    assert.equals(5, rolando.poderPelea())
+    rolando.recolectar(libro)
+
+    assert.equals(4, libro.poder(rolando))
+    assert.equals(9, rolando.poderPelea())
+
+    rolando.lucharBatalla()
+
+    assert.equals(6, libro.poder(rolando))
+  }
+
+  test "Poder hechizo invocación" {
+    assert.equals(5, rolando.poderPelea())
+    rolando.capacidad(1)
+    rolando.recolectar(armadura)
+
+    rolando.llegarA(castillo)
+    assert.equals(#{}, rolando.artefactosQueLleva())
+    assert.equals([armadura], castillo.artefactosQueHay())
+
+    rolando.recolectar(libro)
+
+    assert.equals(4, libro.poder(rolando))
+    assert.equals(9, rolando.poderPelea())
+
+    rolando.lucharBatalla()
+
+    assert.equals(6, libro.poder(rolando))
+
+    rolando.lucharBatalla()
+    assert.equals(6, libro.poder(rolando))
+  }
+}
+
+
+//Aunque para mi en el test 1 y 2 no deberia de haber seteado que recolecte los artefactos, porque recien en el de invocacion se usa.
+describe "Libro de hechizos: Batallas" {
+  test "Antes de la primer batalla: El libro es bendicion, deberia aportar 4 de poder" {
+    rolando.capacidad(3)
+    rolando.recolectar(espada)
+    rolando.recolectar(armadura)
+    rolando.recolectar(collar)
+
+    assert.equals(#{espada,armadura,collar}, rolando.artefactosQueLleva())
+
+    rolando.llegarA(castillo)
+    assert.equals(#{}, rolando.artefactosQueLleva())
+
+    rolando.recolectar(libro)
+    assert.equals(4, libro.poder(rolando))
+  }
+
+  test "Primer batalla: El libro es invisivilidad, deberia aportar 6 de poder" {
+    rolando.capacidad(3)
+    rolando.recolectar(espada)
+    rolando.recolectar(armadura)
+    rolando.recolectar(collar)
+
+    assert.equals(#{espada,armadura,collar}, rolando.artefactosQueLleva())
+
+    rolando.llegarA(castillo)
+    assert.equals(#{}, rolando.artefactosQueLleva())
+
+    rolando.recolectar(libro)
+    assert.equals(4, libro.poder(rolando))
+
+    rolando.lucharBatalla()
+    assert.equals(6, libro.poder(rolando))
+  }
+
+  test "Segunda batalla: El libro es invocación deberia dar 7 de poder" {
+    rolando.capacidad(3)
+    rolando.recolectar(espada)
+    rolando.recolectar(armadura)
+    rolando.recolectar(collar)
+
+    assert.equals(#{espada,armadura,collar}, rolando.artefactosQueLleva())
+
+    rolando.llegarA(castillo)
+    assert.equals(#{}, rolando.artefactosQueLleva())
+
+    rolando.recolectar(libro)
+    assert.equals(4, libro.poder(rolando))
+
+    rolando.lucharBatalla()
+    assert.equals(6, libro.poder(rolando))
+
+    rolando.lucharBatalla()
+    assert.equals(7, libro.poder(rolando))
+  }
+
+  test "Tercer batalla: Ya no quedan hechizos deberia aportar 0 de poder" {
+    rolando.capacidad(3)
+    rolando.recolectar(espada)
+    rolando.recolectar(armadura)
+    rolando.recolectar(collar)
+
+    assert.equals(#{espada,armadura,collar}, rolando.artefactosQueLleva())
+
+    rolando.llegarA(castillo)
+    assert.equals(#{}, rolando.artefactosQueLleva())
+
+    rolando.recolectar(libro)
+    assert.equals(4, libro.poder(rolando))
+
+    rolando.lucharBatalla()
+    assert.equals(6, libro.poder(rolando))
+
+    rolando.lucharBatalla()
+    assert.equals(7, libro.poder(rolando))
+
+    rolando.lucharBatalla()
+    assert.equals(0, libro.poder(rolando))
+  }
+}

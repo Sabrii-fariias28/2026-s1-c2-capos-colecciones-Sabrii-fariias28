@@ -66,6 +66,6 @@ object invisibilidad {
 
 object invocacion {
   method poder(personaje) {
-    return castillo.artefactoMasPoderoso(personaje)
+    return (castillo.artefactoMasPoderoso(personaje)).poder(personaje)
   }
 }

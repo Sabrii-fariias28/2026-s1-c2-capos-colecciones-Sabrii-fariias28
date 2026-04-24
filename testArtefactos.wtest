@@ -8,7 +8,6 @@ describe "Poder artefactos" {
 
     assert.equals(5, espada.poder(rolando))
 
-    
     rolando.lucharBatalla()
     assert.equals(3, espada.poder(rolando))
   }
@@ -80,7 +79,7 @@ describe "Batallas de Ronaldo" {
     rolando.lucharBatalla()
     assert.equals(21.5,rolando.poderPelea())
 
-    ronaldo.lucharBatalla()
-    assert.equals(24,ronaldo.poderPelea())
+    rolando.lucharBatalla()
+    assert.equals(24,rolando.poderPelea())
   }
 }
