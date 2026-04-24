@@ -1,7 +1,86 @@
 import capos.*
+import artefactos.*
 
-describe "name" {
-  test "description" {
+describe "Poder artefactos" {
+  test "Poder espada" {
+    rolando.capacidad(1)
+    rolando.recolectar(espada)
+
+    assert.equals(5, espada.poder(rolando))
+
     
+    rolando.lucharBatalla()
+    assert.equals(3, espada.poder(rolando))
+  }
+
+    test "Poder collar" {
+    rolando.capacidad(1)
+    rolando.recolectar(collar)
+
+    assert.equals(3, collar.poder(rolando))
+
+    rolando.lucharBatalla()
+    assert.equals(3, collar.poder(rolando))
+
+    rolando.lucharBatalla()
+    assert.equals(5, collar.poder(rolando))
+  }
+
+    test "Poder armadura" {
+    rolando.capacidad(1)
+    rolando.recolectar(armadura)
+
+    assert.equals(6, armadura.poder(rolando))
+
+    rolando.lucharBatalla()
+    assert.equals(6, armadura.poder(rolando))
+  }
+}
+
+describe "Batallas de Ronaldo" {
+  test "Ronaldo : Primer batalla" {
+    rolando.capacidad(3)
+    rolando.recolectar(espada)
+    rolando.recolectar(armadura)
+    rolando.recolectar(collar)
+
+    //Poder de base 5 + espada 5 + collar 3 + armadura 6 
+    assert.equals(19, rolando.poderPelea())
+    rolando.lucharBatalla()
+    //Poder de base 6 + espada 3 + collar 3 + armadura 6 
+    assert.equals(18, rolando.poderPelea())
+  }
+
+  test "Ronaldo: Segunda batalla" {
+    rolando.capacidad(3)
+    rolando.recolectar(espada)
+    rolando.recolectar(armadura)
+    rolando.recolectar(collar)
+
+    assert.equals(19, rolando.poderPelea())
+    rolando.lucharBatalla()
+
+    assert.equals(18, rolando.poderPelea())
+
+    rolando.lucharBatalla()
+    assert.equals(21.5,rolando.poderPelea())
+  }
+
+  test "Ronaldo: Tercera batalla" {
+    rolando.capacidad(3)
+    rolando.recolectar(espada)
+    rolando.recolectar(armadura)
+    rolando.recolectar(collar)
+
+    assert.equals(19, rolando.poderPelea())
+    rolando.lucharBatalla()
+
+    assert.equals(18, rolando.poderPelea())
+
+    rolando.lucharBatalla()
+    assert.equals(21.5,rolando.poderPelea())
+
+    rolando.lucharBatalla()
+    assert.equals(24, rolando.poderPelea())
   }
 }

@@ -1,80 +1,82 @@
 import capos.*
+import artefactos.*
+
 
 describe "Ronaldo recolecta artefactos" {
   test "Guarda 2 artefactos en la mochila y llega al castillo : Caso normal" {
-    ronaldo.capacidad(2)
-    ronaldo.recolectar(espada)
+    rolando.capacidad(2)
+    rolando.recolectar(espada)
       // Otra forma: assert.that(rolando.artefactos().contains(espada))
-    assert.equals(#{espada}, ronaldo.artefactosQueLleva())
-    ronaldo.recolectar(libro)
-    assert.equals(#{espada,libro}, ronaldo.artefactosQueLleva())
+    assert.equals(#{espada}, rolando.artefactosQueLleva())
+    rolando.recolectar(libro)
+    assert.equals(#{espada,libro}, rolando.artefactosQueLleva())
 
-    ronaldo.llegarA(castillo)
-    assert.equals(#{}, ronaldo.artefactosQueLleva())
+    rolando.llegarA(castillo)
+    assert.equals(#{}, rolando.artefactosQueLleva())
     assert.equals([espada,libro], castillo.artefactosQueHay())
 
-    ronaldo.recolectar(collar)
-    assert.equals(#{collar}, ronaldo.artefactosQueLleva())
+    rolando.recolectar(collar)
+    assert.equals(#{collar}, rolando.artefactosQueLleva())
 
-    ronaldo.llegarA(castillo)
+    rolando.llegarA(castillo)
     assert.equals([espada,libro,collar], castillo.artefactosQueHay())
     
   }
     test "Ronaldo no recolecta un artefacto" {
-      ronaldo.capacidad(0)
-      ronaldo.recolectar(espada)
-      assert.equals(0, ronaldo.artefactosQueLleva().size())
+      rolando.capacidad(0)
+      rolando.recolectar(espada)
+      assert.equals(0, rolando.artefactosQueLleva().size())
     }
 
   test "Validar que no puede agarrar 3 artefactos a la mochila por la capacidad 2" {
-    ronaldo.recolectar(espada)
-    ronaldo.recolectar(libro)
-    ronaldo.recolectar(collar)
-    assert.notThat(ronaldo.tieneEspacio())
+    rolando.recolectar(espada)
+    rolando.recolectar(libro)
+    rolando.recolectar(collar)
+    assert.notThat(rolando.tieneEspacio())
   }
 
   test "El castillo tiene 2 artefactos y ronaldo 1 en su mochila, las posesiones deberian ser 3" {
     castillo.guardarArtefactos([collar,espada])
     assert.equals([collar,espada], castillo.artefactosQueHay())
 
-    ronaldo.recolectar(armadura)
-    assert.equals(#{armadura}, ronaldo.artefactosQueLleva())
+    rolando.recolectar(armadura)
+    assert.equals(#{armadura}, rolando.artefactosQueLleva())
 
-    ronaldo.posesiones()
-    assert.equals([armadura,collar,espada], ronaldo.posesiones())
+    rolando.posesiones()
+    assert.equals([armadura,collar,espada], rolando.posesiones())
   }
 
   test "Que Ronaldo no tenga el libro en sus posesiones" {
     castillo.guardarArtefactos([collar,espada])
     assert.equals([collar,espada], castillo.artefactosQueHay())
 
-    ronaldo.recolectar(armadura)
-    assert.equals(#{armadura}, ronaldo.artefactosQueLleva())
+    rolando.recolectar(armadura)
+    assert.equals(#{armadura}, rolando.artefactosQueLleva())
 
-    ronaldo.posesiones()
-    assert.equals([armadura,collar,espada], ronaldo.posesiones())
-    assert.notThat(ronaldo.posee(libro))
+    rolando.posesiones()
+    assert.equals([armadura,collar,espada], rolando.posesiones())
+    assert.notThat(rolando.posee(libro))
   }
 
   test "Historial de los encuentros de los artefactos"{
-    ronaldo.capacidad(2)
-    ronaldo.recolectar(espada)
-    ronaldo.recolectar(libro)
-    ronaldo.recolectar(collar)
+    rolando.capacidad(2)
+    rolando.recolectar(espada)
+    rolando.recolectar(libro)
+    rolando.recolectar(collar)
 
-    assert.notThat(ronaldo.tieneEspacio())
-    assert.equals(#{espada,libro}, ronaldo.artefactosQueLleva())
+    assert.notThat(rolando.tieneEspacio())
+    assert.equals(#{espada,libro}, rolando.artefactosQueLleva())
 
-    ronaldo.llegarA(castillo)
-    assert.equals(#{}, ronaldo.artefactosQueLleva())
+    rolando.llegarA(castillo)
+    assert.equals(#{}, rolando.artefactosQueLleva())
     assert.equals([espada,libro], castillo.artefactosQueHay())
 
-    ronaldo.recolectar(armadura)
-    assert.equals(#{armadura}, ronaldo.artefactosQueLleva())
-    ronaldo.recolectar(collar)
-    assert.equals(#{armadura,collar}, ronaldo.artefactosQueLleva())
+    rolando.recolectar(armadura)
+    assert.equals(#{armadura}, rolando.artefactosQueLleva())
+    rolando.recolectar(collar)
+    assert.equals(#{armadura,collar}, rolando.artefactosQueLleva())
 
-    ronaldo.historial()
-    assert.equals([espada,libro,collar,armadura,collar], ronaldo.historial())
+    rolando.historial()
+    assert.equals([espada,libro,collar,armadura,collar], rolando.historial())
   }
 }
