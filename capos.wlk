@@ -83,6 +83,15 @@ object rolando {
   method poderBase(_poderBase) {
     poderBase = _poderBase
   }
+
+  //Consulta si rolando tiene o no un artefacto fatal para un enemigo en particular
+  method tieneArtefactoFatalPara(enemigo) {
+    return listaArtefactos.any({artefacto => artefacto.poder(self) > enemigo.poder()})
+  }
+
+  method artefactoFatalPara(enemigo) {
+  return listaArtefactos.find({artefacto => artefacto.poder(self) > enemigo.poder()})
+  }
 }
 
 /*
@@ -118,4 +127,9 @@ object ronaldo {
     return castillo.listaArtefactos().max()({a => a.poder()})
 }
 }
+
+Ejemplo: Esta mal porque suma el poder de todos los artefactos, y pide que un artefacto sea el fatal para un enemigo en particular. Ahi me dice que algunos cumplen la condicion
+  method tieneArtefactoFatal() {
+    return self.enemigos().any({enemigo => enemigo.esDebil()})
+  }
 */
